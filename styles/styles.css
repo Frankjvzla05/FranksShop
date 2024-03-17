@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(207, 231, 250);
+}
+.producto {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+.promo {
+    font-size: larger;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+#carrito {
+    margin-top: 20px;
+    font-weight: bold;
+}
