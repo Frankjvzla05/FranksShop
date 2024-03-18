@@ -23,47 +23,76 @@
         <p class="intro">Bienvenido a Franks Shop, tu destino de compras en línea. Explora nuestras ofertas destacadas y
             descubre productos de calidad a precios increíbles.</p>
 
+
         <section class="featured-section">
-            <section class="featured-section">
-                <h2>¡Descubre nuestras ofertas destacadas!</h2>
-                <p class="promo">Si compras 5 ó mas productos tienes un 10% de descuento</p>
-                <div id="productos" class="productos">
-                    <div class="producto">Camisa $20<br><br>
+            <h2>¡Descubre nuestras ofertas destacadas!</h2>
+            <p class="promo">Si compras 5 ó mas productos tienes un 10% de descuento</p>
+
+            <div id="productos" class="productos">
+                <div class="producto">
+                    <img src="https://picsum.photos/250/220?random=1" alt="Camisa">
+                    <p>Camisa $20<br><br>
                         <button onclick="agregarAlCarrito('Camisa',20)">
                             Añadir al carro
                         </button>
-                    </div>
-                    <div class="producto">Pantalon $30<br><br>
+                    </p>
+                </div>
+                <div class="producto">
+                    <img src="https://picsum.photos/250/220?random=1" alt="Pantalon">
+                    <p>Pantalon $30<br><br>
                         <button onclick="agregarAlCarrito('Pantalon',30)">
                             Añadir al carro
                         </button>
-                    </div>
-                    <div class="producto">Abrigo $25<br><br>
+                    </p>
+                </div>
+                <div class="producto">
+                    <img src="https://picsum.photos/250/220?random=1" alt="Abrigo">
+                    <p>Abrigo $25<br><br>
                         <button onclick="agregarAlCarrito('Abrigo',25)">
                             Añadir al carro
                         </button>
-                    </div>
-                    <div class="producto">Gorra $10<br><br>
+                    </p>
+                </div>
+                <div class="producto">
+                    <img src="https://picsum.photos/250/220?random=1" alt="Gorra">
+                    <p>Gorra $10<br><br>
                         <button onclick="agregarAlCarrito('Gorra',10)">
                             Añadir al carro
                         </button>
-                    </div>
-                    <div class="producto">Zapatos $40<br><br>
-                        <button onclick="agregarAlCarrito('Zapato',40)">
+                    </p>
+                </div>
+                <div class="producto">
+                    <img src="https://picsum.photos/250/220?random=1" alt="Zapatos">
+                    <p>Zapatos $40<br><br>
+                        <button onclick="agregarAlCarrito('Zapatos',40)">
                             Añadir al carro
                         </button>
-                    </div>
-                    <div class="producto">Falda $18<br><br>
+                    </p>
+                </div>
+                <div class="producto">
+                    <img src="https://picsum.photos/250/220?random=1" alt="Falda">
+                    <p>Falda $18<br><br>
                         <button onclick="agregarAlCarrito('Falda',18)">
                             Añadir al carro
                         </button>
-                    </div>
-                </div>
-            </section>
-            <section class="product-list">
+                    </p>
+                </div>               
+            </div>
+        </section>
+        <div id="carrito" class="Cart">
+            <!-- Información del carrito -->
+            <p>Cantidad de productos en el carrito: <span id="cantidadProductosEnCarrito">0</span></p>
+            <p>Monto total: $<span id="montoTotal">0</span></p>
+            <p id="descuentoMensaje"></p>
+        
+            <!-- Lista de productos en el carrito con botones de eliminar -->
+            <div id="productosCarrito" class="productosCarrito">
+                <!-- Aquí se agregarán los productos -->
+            </div>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2024 Franks Shop. Todos los derechos reservados.</p>
+        <p class="copyright">&copy; 2024 Franks Shop. Todos los derechos reservados.</p>
     </footer>
     <script src="js/main.js"></script>
 </body>
