@@ -1,5 +1,5 @@
 body {
-    background-color: #87CEEB;
+    background-color: #f9f9f9;
     margin: 0;
 }
 
@@ -24,8 +24,8 @@ body {
 .productosCarrito {
     display: flex;
     flex-wrap: wrap;
-    width: 25%;
-    gap: .2rem;
+    width: 100%;
+    gap: .7rem;
 }
 
 #carrito {
