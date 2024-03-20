@@ -23,6 +23,7 @@ function eliminarDelCarrito(index) {
 function actualizarCarrito(montoTotal) {
     console.log("Cantidad de productos:", cantidadProductosEnCarrito);
     console.log("Monto total: $", montoTotal.toFixed(2));
+    console.log("-------------------------------------------")
 
     document.getElementById("cantidadProductosEnCarrito").textContent = cantidadProductosEnCarrito;
     document.getElementById("montoTotal").textContent = montoTotal.toFixed(2);
@@ -43,7 +44,9 @@ function actualizarCarrito(montoTotal) {
     if (cantidadProductosEnCarrito >= promoDescuento) {
         descuento = (montoTotal * porcentajeDescuento) / 100;
         montoTotal -= descuento;
+        console.log(`¡Felicidades! Se aplicó un ${porcentajeDescuento}% de descuento. Descuento aplicado: $${descuento.toFixed(2)}. Nuevo monto total: $${montoTotal.toFixed(2)}`);
         console.log("Monto con descuento: $", montoTotal.toFixed(2));
+        console.log("-------------------------------------------")
         document.getElementById("descuentoMensaje").textContent = `¡Felicidades! Se aplicó un ${porcentajeDescuento}% de descuento. Descuento aplicado: $${descuento.toFixed(2)}. Nuevo monto total: $${montoTotal.toFixed(2)}`;
     } else {
         document.getElementById("descuentoMensaje").textContent = "No se aplicó ningún descuento.";
