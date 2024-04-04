@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "nombre": "Teléfono inteligente",
+        "imagen": "/assets/images/Smartphone.png",
+        "precio": 400,
+        "descripcion": "Potente, moderno, 5G",
+        "stock": 15
+    },
+    {
+        "id": 2,
+        "nombre": "Tablet",
+        "imagen": "/assets/images/tablet.png",
+        "precio": 300,
+        "descripcion": "Compacto, pantalla HD",
+        "stock": 10
+    },
+    {
+        "id": 3,
+        "nombre": "Laptop",
+        "imagen": "/assets/images/laptop.png",
+        "precio": 800,
+        "descripcion": "Rápida, diseño elegante",
+        "stock": 8
+    },
+    {
+        "id": 4,
+        "nombre": "Cámara DSLR",
+        "imagen": "/assets/images/Camara.png",
+        "precio": 700,
+        "descripcion": "Profesional, alta resolución",
+        "stock": 5
+    },
+    {
+        "id": 5,
+        "nombre": "Auriculares inalámbricos",
+        "imagen": "/assets/images/Auriculares-inalambricos.png",
+        "precio": 150,
+        "descripcion": "Sonido envolvente",
+        "stock": 12
+    },
+    {
+        "id": 6,
+        "nombre": "Smartwatch",
+        "imagen": "/assets/images/Smartwatch.png",
+        "precio": 200,
+        "descripcion": "Conectividad Bluetooth",
+        "stock": 20
+    },
+    {
+        "id": 7,
+        "nombre": "Altavoz portátil",
+        "imagen": "/assets/images/Altavoz.png",
+        "precio": 100,
+        "descripcion": "Sonido potente",
+        "stock": 18
+    },
+    {
+        "id": 8,
+        "nombre": "Teclado inalámbrico",
+        "imagen": "/assets/images/teclado.png",
+        "precio": 50,
+        "descripcion": "Ergonómico, conexión USB",
+        "stock": 7
+    },
+    {
+        "id": 9,
+        "nombre": "Monitor 4K",
+        "imagen": "/assets/images/Monitor.png",
+        "precio": 600,
+        "descripcion": "Gran resolución",
+        "stock": 6
+    },
+    {
+        "id": 10,
+        "nombre": "Impresora multifunción",
+        "imagen": "/assets/images/impresora.png",
+        "precio": 250,
+        "descripcion": "Escaneo, copia, impresión",
+        "stock": 14
+    },
+    {
+        "id": 11,
+        "nombre": "Router WiFi",
+        "imagen": "/assets/images/Router-WiFi.png",
+        "precio": 120,
+        "descripcion": "Conexión estable",
+        "stock": 11
+    },
+    {
+        "id": 12,
+        "nombre": "PlayStation 5",
+        "imagen": "/assets/images/Playsation-5.png",
+        "precio": 500,
+        "descripcion": "Juegos de alta calidad",
+        "stock": 9
+    }
+]

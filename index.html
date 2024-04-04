@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
     <title>Franks Shop</title>
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
     <header>
-        <h1>Franks Shop</h1>
+        <div class="headerTop">
+            <h1>Franks Shop</h1>
+            <div class="carritoComprasContainer">
+                <img class="carritoCompras" src="/assets/images/carrito-de-compras.svg" alt="Carrito de compras">
+                <p id="cantidadProductosEnCarrito" class="cantidadProductosEnCarritoIcono"></p>
+            </div>
+        </div>
         <nav>
             <ul>
                 <li><a href="#">Inicio</a></li>
@@ -29,54 +36,7 @@
             <p class="promo">Si compras 5 ó mas productos tienes un 10% de descuento</p>
 
             <div id="productos" class="productos">
-                <div class="producto">
-                    <img src="assets/images/Camisa.png" alt="Camisa">
-                    <p>Camisa $20<br><br>
-                        <button onclick="agregarAlCarrito('Camisa',20)">
-                            Añadir al carro
-                        </button>
-                    </p>
-                </div>
-                <div class="producto">
-                    <img src="assets/images/Pantalon.png" alt="Pantalon">
-                    <p>Pantalon $30<br><br>
-                        <button onclick="agregarAlCarrito('Pantalon',30)">
-                            Añadir al carro
-                        </button>
-                    </p>
-                </div>
-                <div class="producto">
-                    <img src="assets/images/Abrigo.png" alt="Abrigo">
-                    <p>Abrigo $25<br><br>
-                        <button onclick="agregarAlCarrito('Abrigo',25)">
-                            Añadir al carro
-                        </button>
-                    </p>
-                </div>
-                <div class="producto">
-                    <img src="assets/images/Gorra.png" alt="Gorra">
-                    <p>Gorra $10<br><br>
-                        <button onclick="agregarAlCarrito('Gorra',10)">
-                            Añadir al carro
-                        </button>
-                    </p>
-                </div>
-                <div class="producto">
-                    <img src="assets/images/Zapatos.png" alt="Zapatos">
-                    <p>Zapatos $40<br><br>
-                        <button onclick="agregarAlCarrito('Zapatos',40)">
-                            Añadir al carro
-                        </button>
-                    </p>
-                </div>
-                <div class="producto">
-                    <img src="assets/images/Falda.png" alt="Falda">
-                    <p>Falda $18<br><br>
-                        <button onclick="agregarAlCarrito('Falda',18)">
-                            Añadir al carro
-                        </button>
-                    </p>
-                </div>               
+                <!-- Lista de productos -->
             </div>
         </section>
         <div id="carrito" class="Cart">
@@ -84,7 +44,7 @@
             <p>Cantidad de productos en el carrito: <span id="cantidadProductosEnCarrito">0</span></p>
             <p>Monto total: $<span id="montoTotal">0</span></p>
             <p id="descuentoMensaje"></p>
-        
+
             <!-- Lista de productos en el carrito con botones de eliminar -->
             <div id="productosCarrito" class="productosCarrito">
                 <!-- Aquí se agregarán los productos -->
@@ -94,7 +54,6 @@
     <footer>
         <p class="copyright">&copy; 2024 Franks Shop. Todos los derechos reservados.</p>
     </footer>
-    <script src="js/main.js"></script>
 </body>
 
 </html>
