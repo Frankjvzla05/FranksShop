@@ -1,6 +1,9 @@
 let cantidadProductosEnCarrito = 0;
 let montoTotal = 0;
 let descuento = 0;
+let productos = [];
+let categories = [];
+const container = document.getElementById('productos');
 const productosEnCarrito = [];
 window.sessionStorage.setItem('productQuantity', cantidadProductosEnCarrito);
 window.sessionStorage.setItem('productsInCart', productosEnCarrito);
@@ -66,15 +69,15 @@ const createProduct = (product) => {
     const producto = document.createElement("div");
     producto.setAttribute("class", "producto");
     const productImage = document.createElement("img");
-    productImage.setAttribute('src', `${product.imagen}`);
+    productImage.setAttribute('src', `${product.image}`);
     producto.appendChild(productImage);
     const productName = document.createElement("h3");
-    const productNameText = document.createTextNode(`${product.nombre}`);
+    const productNameText = document.createTextNode(`${product.title}`);
     productName.appendChild(productNameText);
     producto.appendChild(productName);
 
     const productPrice = document.createElement("p");
-    const productPriceText = document.createTextNode(`$${product.precio}`);
+    const productPriceText = document.createTextNode(`$${product.price}`);
     productPrice.appendChild(productPriceText);
     producto.appendChild(productPrice);
 
@@ -84,25 +87,47 @@ const createProduct = (product) => {
     addToCartButton.setAttribute("onClick", `agregarAlCarrito('${product.nombre}' , ${product.precio})`)
     producto.appendChild(addToCartButton);
 
-    const container = document.getElementById('productos');
+    
     container.appendChild(producto);
 }
 
+const renderProducts = (productos) => {
+    container.innerHTML = "";
+    productos.map(product => {
+        return (createProduct(product))
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('/data/productos.json')
+    fetch('https://fakestoreapi.com/products')
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            data.map(product => {
-                return (createProduct(product))
-            });
+            productos = data;
+            return renderProducts(data)
         })
 
 });
 
+
 document.addEventListener('DOMContentLoaded', function () {
     const cantidadProductosEnCarrito = window.sessionStorage.getItem('productQuantity') || 0;
-
     const cantidadProductosP = document.querySelector('.cantidadProductosEnCarritoIcono');
     cantidadProductosP.textContent = cantidadProductosEnCarrito;
 });
+
+const categoryButtons = document.querySelectorAll(".boton-categoria");
+
+categoryButtons.forEach(boton => {
+    boton.addEventListener("click", (e)=>{
+        categoryButtons.forEach(boton=> boton.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+        if(e.currentTarget.id != "all"){
+            categories = productos.filter( producto => producto.category === e.currentTarget.id);
+            renderProducts(categories);
+        } else {
+            renderProducts(productos);
+        }
+    })
+})
