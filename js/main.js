@@ -1,133 +1,110 @@
-let cantidadProductosEnCarrito = 0;
-let montoTotal = 0;
-let descuento = 0;
-let productos = [];
+let products = [];
 let categories = [];
-const container = document.getElementById('productos');
-const productosEnCarrito = [];
-window.sessionStorage.setItem('productQuantity', cantidadProductosEnCarrito);
-window.sessionStorage.setItem('productsInCart', productosEnCarrito);
-const promoDescuento = 5;
-const porcentajeDescuento = 10;
+const container = document.getElementById('products');
+const categoryButtons = document.querySelectorAll(".category-button");
+const mainTitle = document.querySelector("#main-title");
+let buttonsAdd = document.querySelectorAll(".products-add");
+const cartNumber = document.querySelector("#cartNumber");
 
-function agregarAlCarrito(nombre, precio) {
-    cantidadProductosEnCarrito += 1;
-    montoTotal += precio;
-    productosEnCarrito.push({ nombre: nombre, precio: precio });
-    actualizarCarrito(montoTotal);
-    actualizarCantidadProductosEnCarrito(cantidadProductosEnCarrito);
-}
-function actualizarCantidadProductosEnCarrito(cantidad) {
-    document.getElementById("cantidadProductosEnCarrito").textContent = cantidad;
-    window.sessionStorage.setItem('productQuantity', cantidad);
-}
-
-function eliminarDelCarrito(index) {
-    montoTotal -= productosEnCarrito[index].precio;
-    productosEnCarrito.splice(index, 1);
-    cantidadProductosEnCarrito -= 1;
-    actualizarCarrito(montoTotal);
-    actualizarCantidadProductosEnCarrito(cantidadProductosEnCarrito);
-}
-
-function actualizarCarrito(montoTotal) {
-    console.log("Cantidad de productos:", cantidadProductosEnCarrito);
-    console.log("Monto total: $", montoTotal.toFixed(2));
-    console.log("-------------------------------------------")
-
-    document.getElementById("cantidadProductosEnCarrito").textContent = cantidadProductosEnCarrito;
-    document.getElementById("montoTotal").textContent = montoTotal.toFixed(2);
-
-    const productosCarrito = document.getElementById("productosCarrito");
-    productosCarrito.innerHTML = "";
-
-    productosEnCarrito.forEach((producto, index) => {
-        const productoHTML = `
-            <div>
-                <span>${producto.nombre} - $${producto.precio.toFixed(2)}</span>
-                <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
-            </div>
-        `;
-        productosCarrito.innerHTML += productoHTML;
-    });
-
-    if (cantidadProductosEnCarrito >= promoDescuento) {
-        descuento = (montoTotal * porcentajeDescuento) / 100;
-        montoTotal -= descuento;
-        console.log(`¡Felicidades! Se aplicó un ${porcentajeDescuento}% de descuento. Descuento aplicado: $${descuento.toFixed(2)}. Nuevo monto total: $${montoTotal.toFixed(2)}`);
-        console.log("Monto con descuento: $", montoTotal.toFixed(2));
-        console.log("-------------------------------------------")
-        document.getElementById("descuentoMensaje").textContent = `¡Felicidades! Se aplicó un ${porcentajeDescuento}% de descuento. Descuento aplicado: $${descuento.toFixed(2)}. Nuevo monto total: $${montoTotal.toFixed(2)}`;
-    } else {
-        document.getElementById("descuentoMensaje").textContent = "No se aplicó ningún descuento.";
-    }
-
-    document.getElementById("montoTotal").textContent = montoTotal.toFixed(2);
-}
-
-const createProduct = (product) => {
-    const producto = document.createElement("div");
-    producto.setAttribute("class", "producto");
+const createProduct = (productData) => {
+    const product = document.createElement("div");
+    product.setAttribute("class", "product");
     const productImage = document.createElement("img");
-    productImage.setAttribute('src', `${product.image}`);
-    producto.appendChild(productImage);
+    productImage.setAttribute('src', `${productData.image}`);
+    product.appendChild(productImage);
     const productName = document.createElement("h3");
-    const productNameText = document.createTextNode(`${product.title}`);
+    const productNameText = document.createTextNode(`${productData.title}`);
     productName.appendChild(productNameText);
-    producto.appendChild(productName);
+    product.appendChild(productName);
 
     const productPrice = document.createElement("p");
-    const productPriceText = document.createTextNode(`$${product.price}`);
+    const productPriceText = document.createTextNode(`$${productData.price}`);
     productPrice.appendChild(productPriceText);
-    producto.appendChild(productPrice);
+    product.appendChild(productPrice);
 
     const addToCartButton = document.createElement("button");
     const addToCartButtonText = document.createTextNode("Añadir al carro");
     addToCartButton.appendChild(addToCartButtonText);
-    addToCartButton.setAttribute("onClick", `agregarAlCarrito('${product.nombre}' , ${product.precio})`)
-    producto.appendChild(addToCartButton);
+    addToCartButton.setAttribute('data-product-id', productData.id);
+    addToCartButton.classList.add("products-add");
+    product.appendChild(addToCartButton);
 
-    
-    container.appendChild(producto);
+    container.appendChild(product);
+    updateButtons();
 }
 
-const renderProducts = (productos) => {
+const renderProducts = (productsData) => {
     container.innerHTML = "";
-    productos.map(product => {
-        return (createProduct(product))
+    productsData.forEach(product => {
+        createProduct(product);
     });
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     fetch('https://fakestoreapi.com/products')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            productos = data;
-            return renderProducts(data)
+            renderProducts(data);
+            products = data;
         })
-
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const cantidadProductosEnCarrito = window.sessionStorage.getItem('productQuantity') || 0;
-    const cantidadProductosP = document.querySelector('.cantidadProductosEnCarritoIcono');
-    cantidadProductosP.textContent = cantidadProductosEnCarrito;
-});
 
-const categoryButtons = document.querySelectorAll(".boton-categoria");
-
-categoryButtons.forEach(boton => {
-    boton.addEventListener("click", (e)=>{
-        categoryButtons.forEach(boton=> boton.classList.remove("active"));
+categoryButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        categoryButtons.forEach(button => button.classList.remove("active"));
         e.currentTarget.classList.add("active");
-        if(e.currentTarget.id != "all"){
-            categories = productos.filter( producto => producto.category === e.currentTarget.id);
-            renderProducts(categories);
+
+        if (e.currentTarget.id != "all") {
+            const productsByCategory = products.filter(product => product.category === e.currentTarget.id);
+            mainTitle.innerText = e.currentTarget.id;
+            renderProducts(productsByCategory);
         } else {
-            renderProducts(productos);
+            mainTitle.innerText = "All Products";
+            renderProducts(products);
         }
-    })
-})
+    });
+});
+
+const updateButtons = () => {
+    buttonsAdd = document.querySelectorAll(".products-add");
+
+    buttonsAdd.forEach(button => {
+        button.addEventListener("click", addToCart);
+    });
+}
+let productsInCart;
+const productsInCartLs = JSON.parse(localStorage.getItem("products-in-cart"));
+if (productsInCartLs) {
+    productsInCart = productsInCartLs
+    updateCartNumber();
+} else {
+    productsInCart = [];
+}
+
+
+const addToCart = (e) => {
+    const idButton = Number(e.target.getAttribute('data-product-id'));
+    const addedProduct = products.find(product => product.id === idButton);
+
+    if (productsInCart.some(product => product.id === idButton)) {
+        const index = productsInCart.findIndex(product => product.id === idButton);
+        productsInCart[index].quantity++;
+    } else {
+        addedProduct.quantity = 1;
+        productsInCart.push(addedProduct)
+    }
+
+    updateCartNumber();
+    localStorage.setItem("products-in-cart", JSON.stringify(productsInCart));
+}
+
+function updateCartNumber() {
+    let newCartNumber = productsInCart.reduce((acc, product) => acc + product.quantity, 0);
+    cartNumber.innerHTML = newCartNumber;
+
+}
+
+
+
