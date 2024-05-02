@@ -75,9 +75,10 @@ const updateButtons = () => {
     });
 }
 let productsInCart;
-const productsInCartLs = JSON.parse(localStorage.getItem("products-in-cart"));
+let productsInCartLs = localStorage.getItem("products-in-cart");
+
 if (productsInCartLs) {
-    productsInCart = productsInCartLs
+    productsInCart = JSON.parse(productsInCartLs);
     updateCartNumber();
 } else {
     productsInCart = [];
